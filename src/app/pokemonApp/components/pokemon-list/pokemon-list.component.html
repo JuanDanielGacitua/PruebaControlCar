@@ -1,13 +1,14 @@
-<div class="row">
+<div class="row bg-dark">
   <div class="col-md-6">
-    <div class="container fixed container-xl bg-danger fixed border-bottom border-5 border-end border-black rounded-5 w-100">
+    <div class="container fixed container-xl bg-dark fixed border-bottom border-5 border-end border-black 
+    boder-top border-5 border-start border-5 w-100">
       <div class="container mt-2 w-50 p-1">
         <form class="d-flex p-1 justify-content-center " role="search">
           <mat-form-field>
             <input
               matInput
               type="text"
-              placeholder="Buscar Pokemon"
+              placeholder="Nombre"
               [formControl]="myControl"
               aria-label="Search"
               (keyup)="onSearchPokemon(myControl.value)"
@@ -24,19 +25,52 @@
         </form>
         <div class="not-found" *ngIf="pokemonNotFound">
           <p class="text-bg-warning text-center fs-6">
-            No se ha encontrado pokemon para "{{ search }}"
+            No hay pokémon registrado con el nombre "{{ search }}"
           </p>
         </div>
       </div>
+
+      <div class="container mt-2 w-50 p-1">
+        <form class="d-flex p-1 justify-content-center " role="search">
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              placeholder="Elemento"
+              [formControl]="myControl"
+              aria-label="Search"
+              (keyup)="onSelectPokemonByType(myControl.value)"
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+        <div class="not-found" *ngIf="pokemonNotFound">
+          <p class="text-bg-warning text-center fs-6">
+            No hay pokémons de tipo "{{ search }}"
+          </p>
+        </div>
+      </div>
+
+      
+
+
+      
       <div class="justify-content-center rounded-5 mx-4">
         <table
-          class="table table-light table-hover table-striped w-100 table-responsive align-middle"
+          class="table table-light table-hover table-striped w-100 table-responsive align-middle border-end border-info rounded-5"
         >
           <thead>
             <tr>
-              <th class="text-center fs-md-5">#</th>
+              <th class="text-center fs-md-5">Pokémon</th>
               <th class="text-center fs-md-5">Nombre</th>
-              <th class="text-center fs-md-5">Imagen</th>
+              <th class="text-center fs-md-5">ID</th>
             </tr>
           </thead>
           <tbody>
@@ -45,11 +79,12 @@
               (click)="onSelectPokemon(poke)"
               [ngStyle]="{ height: '100px' }"
             >
-              <td class="text-center fs-6 fs-md-4">{{ poke.id }}</td>
+            <td class="text-center">
+            <img [src]="poke.pic" [alt]="poke.name" class="w-[20px]" />
+            </td>
               <td class="text-center fs-5 text-uppercase fs-md-3 ">{{ poke.name }}</td>
-              <td class="text-center">
-                <img [src]="poke.pic" [alt]="poke.name" class="w-[20px]" />
-              </td>
+              <td class="text-center fs-6 fs-md-4">{{ poke.id }}</td>
+              
             </tr>
           </tbody>
         </table>
@@ -58,7 +93,7 @@
         <ul class="pagination justify-content-center ">
           <li class="page-item">
             <button
-              class="btn btn-outline-dark border-3  mx-5 rounded-circle btn-large "
+              class="btn btn-outline-light border-3  btn-large mx-5 "
               (click)="prevPage()"
               aria-label="Previous"
             >
@@ -67,7 +102,7 @@
           </li>
           <li class="page-item">
             <button
-              class="btn btn-outline-dark border-3 rounded-circle btn-large mx-5"
+              class="btn btn-outline-light border-3 btn-large mx-5"
               (click)="nextPage()"
               aria-label="Next"
             >

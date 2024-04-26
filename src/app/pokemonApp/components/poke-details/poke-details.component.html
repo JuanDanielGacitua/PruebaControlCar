@@ -1,6 +1,6 @@
 <div
   *ngIf="pokemonDetails"
-  class="card border-5 border border-danger rounded-5 col-lg-9 mx-auto ml-md-5"
+  class="card border-5 border border-info rounded-5 col-lg-9 mx-auto ml-md-5"
   style="margin: 20px;"
 >
   <img
@@ -25,19 +25,19 @@
   </ul>
   <p class="text-center fs-6 my-2">TIPO POKEMON</p>
   <ul class="list-group list-group-horizontal border-0">
-    <li class="list-group-item list-group-item-warning mx-3 " *ngFor="let type of pokemonDetails.types">
+    <li class="list-group-item list-group-item-info mx-3 " *ngFor="let type of pokemonDetails.types">
       {{ type.type.name | uppercase }}
     </li>
   </ul>
   <div class="card-body text-center">
     <button
-      (click)="chooseFavorite()"
-      [disabled]="isAddFavoriteDisabled && !favoriteRemoved"
-      [ngClass]="{ disabled: isAddFavoriteDisabled && !favoriteRemoved }"
+      (click)="chooseCaptura()"
+      [disabled]="isAddCapturaDisabled && !capturaRemoved"
+      [ngClass]="{ disabled: isAddCapturaDisabled && !capturaRemoved }"
       class="btn btn-outline-danger rounded-pill"
     >
       {{
-        isFavorite ? "Ya tienes un pokemon seleccionado" : "Agregar a Favorito"
+        isCaptura ? "Ya tienes un pokemon seleccionado" : "Capturar"
       }}
     </button>
   </div>

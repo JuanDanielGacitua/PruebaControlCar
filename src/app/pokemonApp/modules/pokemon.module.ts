@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { PokeAlphabetComponent } from '../components/poke-alphabet/poke-alphabet.component';
 import { PokemonComponent } from './pokemon.component';
 import { PokeDetailsComponent } from '../components/poke-details/poke-details.component';
 
@@ -16,7 +15,6 @@ import { PokeDetailsComponent } from '../components/poke-details/poke-details.co
     PokemonListComponent,
     PokeDetailsComponent,
     FiltroPipe,
-    PokeAlphabetComponent,
     NavbarComponent,
     PokemonComponent,
   ],
@@ -30,7 +28,6 @@ import { PokeDetailsComponent } from '../components/poke-details/poke-details.co
   exports: [
     PokemonListComponent,
     PokeDetailsComponent,
-    PokeAlphabetComponent,
     PokemonComponent,
     NavbarComponent,
     FiltroPipe,

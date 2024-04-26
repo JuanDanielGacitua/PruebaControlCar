@@ -8,13 +8,13 @@
         height="60"
         class="d-inline-block text-align-center mx-4"
       />
-      PokeApp
+      ¡Bienvenido al Mundo de Pokémon! (test controlCar)
     </a>
     <button
       type="button"
-      id="favorite-button"
+      id="captura-button"
       class="btn btn-light m-3 mx-auto mx-sm-0"
-      (click)="openFavoriteModal(favoriteModal, favoritePokemon)"
+      (click)="openCapturaModal(capturaModal, capturaPokemon)"
     >
       <img
         src="/assets/logo/logo-pokebola.png"
@@ -23,20 +23,17 @@
         height="30"
         class="d-inline-block text-align-center m-2"
       />
-      Pokemon Favorito
-      <span class="fs-5" *ngIf="favoritePokemon.name">{{
-        favoritePokemon.name | uppercase
-      }}</span>
+      Pokémons Capturados
     </button>
 
     <ng-template
-      class="border border-5 border-danger rounded-5"
-      #favoriteModal
+      class="border border-5 border-info rounded-5"
+      #capturaModal
       let-modal
     >
       <div class="modal-header">
         <p class="modal-title fs-2">
-          # {{ favoritePokemon.order }} {{ favoritePokemon.name | uppercase }}
+          # {{ capturaPokemon.order }} {{ capturaPokemon.name | uppercase }}
         </p>
         <button
           type="button"
@@ -45,29 +42,29 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body" *ngIf="favoritePokemon; else noFavorite">
-        <div class="container-fluid">
+      <div class="modal-body" *ngIf="capturaPokemon; else noCaptura">
+        <div class="container-fluid bg-info">
           <div class="row">
             <img
-              [src]="favoritePokemon.pic"
-              [alt]="favoritePokemon.name"
+              [src]="capturaPokemon.pic"
+              [alt]="capturaPokemon.name"
               class="w-[40px]"
             />
             <p class="fs-6">TIPO POKEMON</p>
             <ul class="list-group list-group-horizontal mb-2">
               <li
                 class="list-group-item list-group-item-success m-2"
-                *ngFor="let type of favoritePokemon.types"
+                *ngFor="let type of capturaPokemon.types"
               >
                 {{ type.type.name | uppercase }}
               </li>
             </ul>
             <p></p>
             <p class="fs-5">
-              Experiencia: {{ favoritePokemon.base_experience }}
+              Experiencia: {{ capturaPokemon.base_experience }}
             </p>
-            <p class="fs-5">Altura: {{ favoritePokemon.height }} ft</p>
-            <p class="fs-5">Peso: {{ favoritePokemon.weight }} kg</p>
+            <p class="fs-5">Altura: {{ capturaPokemon.height }} ft</p>
+            <p class="fs-5">Peso: {{ capturaPokemon.weight }} kg</p>
           </div>
         </div>
         <div class="modal-footer">
@@ -80,17 +77,17 @@
           </button>
           <button
             type="button"
-            class="btn btn-danger rounded-pill"
-            (click)="removeFavoritePokemon(favoritePokemon.id)"
+            class="btn btn-info rounded-pill"
+            (click)="removeCapturaPokemon(capturaPokemon.id)"
           >
-            Eliminar de Favorito
+            Liberar Pokemon
           </button>
         </div>
       </div>
-      <ng-template #noFavorite>
+      <ng-template #noCaptura>
         <div class="container-fluid">
           <div class="row">
-            <p class="fs-5">No tiene pokemon favorito</p>
+            <p class="fs-5">Aún no ha capturado Pokémons</p>
           </div>
         </div>
       </ng-template>

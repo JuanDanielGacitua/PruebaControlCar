@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { FecthPokemon, Pokemon, PokemonDetails } from "../models";
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -30,11 +31,22 @@ export class PokemonService {
     );
   }
 
+  getPokemonDetails2(types: string): Observable<PokemonDetails> {
+    const pokeUrl = `${this.url}/pokemon/${types}`;
+
+    return this.http.get<PokemonDetails>(pokeUrl).pipe(
+      map((data) => ({
+        ...data,
+        pic: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`,
+      }))
+    );
+  }
+
   private showAPokemon(resp: FecthPokemon): Pokemon[] {
     const pokemonList: Pokemon[] = resp.results.map((poke) => {
       const urlArr = poke.url.split("/");
       const id = urlArr[6];
-      const pic = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+      const pic = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 
       console.log(urlArr);
 
@@ -47,4 +59,6 @@ export class PokemonService {
 
     return pokemonList;
   }
+
+  
 }

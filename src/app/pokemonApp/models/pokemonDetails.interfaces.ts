@@ -6,7 +6,7 @@ export interface PokemonDetails {
   order: number;
   species: Species;
   stats: Stat[];
-  types: Type[];
+  types: Type [];
   weight: number;
   pic: string;
 }
